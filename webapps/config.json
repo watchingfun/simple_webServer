@@ -1,0 +1,1 @@
+{"server":"0.0.0.0","password":"123","method":"aes-256-cfb","local_port":1080,"local_address":"127.0.0.1","server_port":80,"timeout":600}

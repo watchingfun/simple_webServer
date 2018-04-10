@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<server>
+	<service>
+		<connector port="443" maxThread="10"
+		 protocol="HTTP/1.1"/>
+		<webroot>webapps</webroot>
+		<ip></ip>
+	</service>
+	<username>watchingfun</username>
+	<password>helloWorld</password>
+	<!-- 这里为ss配置文件所在文件夹-->
+	<config>webapps</config>
+	<!-- 配置浏览器请求文件的后缀名及对应的响应数据类型 -->
+	<type-mappings>
+		<type-mapping ext="html" value="text/html"/>
+		<type-mapping ext="jpg" value="image/jpeg"/>
+		<type-mapping ext="png" value="image/png"/>
+		<type-mapping ext="gif" value="image/gif"/>
+		<type-mapping ext="ico" value="image/ico"/>
+		<type-mapping ext="css" value="text/css"/>
+		<type-mapping ext="js" value="text/javascript"/>
+	</type-mappings>
+</server>

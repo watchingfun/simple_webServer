@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>后台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        table {
+            display: block;
+            padding-top: 1%;
+            padding-left: 5%;
+            padding-right: 5%;
+            padding-bottom: 5%;
+            margin: auto;
+            position: relative;
+            color: white;
+            border: white solid 2px;
+            background: rgba(0, 0, 0, 0.356);
+            box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            z-index: 11;
+        }
+
+        body {
+            background: #43C6AC;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #191654, #43C6AC);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #191654, #43C6AC);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
+    </style>
+    <script>
+        function validate_required(port,field, alerttxt) {
+            
+            
+                
+                if (field.value == null || field.value == ""||port.value == null || port.value == "") { alert(alerttxt); return false }
+                else { return true }
+            
+        }
+        function validate_form(thisform) {
+            with (thisform) {
+                if (validate_required(port,password, "数据不合法") == false) { password.focus(); return false }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th>
+                <h3>配置信息</h3>
+            </th>
+        </tr>
+        <tr>
+            <td>
+                端口：
+                <input type="text" value="$port" />
+                <br/>
+                <br/> 密码：
+                <input type="text" value="$password" />
+                <br/>
+                <br/> 加密：
+                <input type="text" value="$method">
+            </td>
+        </tr>
+    </table>
+    <table style="margin-top:1%">
+        <tr>
+            <th>
+                <h3>配置更改</h3>
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <form action="/change" onsubmit="return validate_form(this)">
+                    端口：
+                    <input id="port" type="number" name="port" />
+                    <br/>
+                    <br/> 密码：
+                    <input id="password" type="text" name="password" />
+                    <br/>
+                    <br/> 加密：
+                    <select name="method">
+                        <option value="aes-256-cfb">aes-256-cfb</option>
+                        <option value="aes-256-gcm">aes-256-gcm</option>
+                        <option value="chacha20">chacha20</option>
+                    </select>
+                    <input name="session_id" value="$session_id" hidden>
+                    <input type="submit" value="提交" />
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h3 style="color:rgb(167, 81, 81)">请勿随意更改配置</h3>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
