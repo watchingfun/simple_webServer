@@ -20,10 +20,10 @@ import com.fun.http.Session;
 
 public class ClientHandler implements Runnable {
 	// 1.将Socket保存在类的内部
-	private Socket socket = null;
+	private Socket socket;
 
 	// 2.构造方法，接受socket并保存在类的内部
-	public ClientHandler(Socket socket) {
+	protected ClientHandler(Socket socket) {
 		this.socket = socket;
 	}
 
@@ -39,8 +39,12 @@ public class ClientHandler implements Runnable {
 			 * >>2.获取浏览器发送请求信息的输入流 GET /news.html HTTP/1.1
 			 */
 			InputStream in = socket.getInputStream();
-			HttpRequest request = new HttpRequest(in);
-			request.setIp(socket.getInetAddress().getHostAddress());
+			if (in==null){
+				System.out.println("null inputStream ! thread stop");
+				Thread.currentThread().stop();
+			}
+				HttpRequest request = new HttpRequest(in);
+				request.setIp(socket.getInetAddress().getHostAddress());
 			/*
 			 * 创建HttpResponse对象，将响应信息 封装在该对象中
 			 */
@@ -86,7 +90,7 @@ public class ClientHandler implements Runnable {
 		}
 	}
 
-	private void changeSercive(HttpRequest request, HttpResponse response) throws UnsupportedEncodingException, IOException {
+	private void changeSercive(HttpRequest request, HttpResponse response) throws IOException {
 		// TODO Auto-generated method stub
 		String request_id = null;
 		Integer port = null;
@@ -153,7 +157,7 @@ public class ClientHandler implements Runnable {
 	 *            响应信息对象
 	 * @throws IOException
 	 */
-	private void loginService(HttpRequest request, HttpResponse response) throws IOException {
+	private void loginService(HttpRequest request, HttpResponse response) {
 		// 1.获取用户的登录信息
 		// >>获取用户名
 		String username = request.getParameter("username");
@@ -207,8 +211,8 @@ public class ClientHandler implements Runnable {
 	/**
 	 * 根据浏览器请求的资源路径返回对应的响应数据类型
 	 * 
-	 * @param uri
-	 * @return
+	 * @param file
+	 * @return String
 	 */
 	private String getContentTypeByFile(File file) {
 		/*

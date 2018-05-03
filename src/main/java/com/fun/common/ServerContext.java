@@ -36,12 +36,7 @@ public class ServerContext {
 	
 	static{
 		init();
-		try {
-			ConfigJson.init();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		ConfigJson.init();
 	}
 	private static void init() {
 		/* 读取server.xml文件，将其中的配置信息

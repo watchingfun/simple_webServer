@@ -13,7 +13,7 @@ public class ConfigJson {
 	public static HashMap<String, Object> map;
 
 	@SuppressWarnings("unchecked")
-	public static HashMap<String, Object> init() throws IOException {
+	public static HashMap<String, Object> init() {
 		try {
 			map = JSON.parseObject(FileUtil.fileToString(new File(ServerContext.config + "/config.json")),
 					HashMap.class);
@@ -33,6 +33,9 @@ public class ConfigJson {
 		map.put("method", method);
 		System.out.println(JSON.toJSONString(map));
 		FileUtil.stringToFile(JSON.toJSONString(map), new File(ServerContext.config + "/config.json"));
+		ConfigJson.port = port;
+		ConfigJson.password = password;
+		ConfigJson.method = method;
 	}
 
 }
